@@ -2,6 +2,10 @@
   <img src="assets/pipeline-banner.svg" alt="UniqVid Bot pipeline overview" width="100%">
 </p>
 
+<p align="center">
+  <img src="assets/chat-preview.svg" alt="UniqVid Bot chat preview" width="100%">
+</p>
+
 <h1 align="center">UniqVid Bot</h1>
 
 <p align="center">

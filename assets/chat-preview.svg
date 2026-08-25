@@ -1,0 +1,127 @@
+<svg viewBox="0 0 1200 640" xmlns="http://www.w3.org/2000/svg" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Helvetica,Arial,sans-serif">
+  <style>
+    :root {
+      --bg: #ffffff;
+      --panel-bg: #efe9e1;
+      --header-bg: #517da2;
+      --header-text: #ffffff;
+      --bubble-in-bg: #ffffff;
+      --bubble-in-text: #1f2c34;
+      --bubble-out-bg: #e1ffc7;
+      --bubble-out-text: #1f2c34;
+      --meta: #8a8f94;
+      --card-bg: #f8fafc;
+      --card-border: #e2e8f0;
+      --text: #0f172a;
+      --text-muted: #64748b;
+      --btn-bg: #ffffff;
+      --btn-border: #cfd8e3;
+      --btn-text: #2678b6;
+    }
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --bg: #0b1220;
+        --panel-bg: #0e1621;
+        --header-bg: #202b33;
+        --header-text: #e9edef;
+        --bubble-in-bg: #1f2c34;
+        --bubble-in-text: #e9edef;
+        --bubble-out-bg: #005c4b;
+        --bubble-out-text: #e9edef;
+        --meta: #7d8890;
+        --card-bg: #141b2d;
+        --card-border: #263049;
+        --text: #f1f5f9;
+        --text-muted: #94a3b8;
+        --btn-bg: #1f2c34;
+        --btn-border: #33424c;
+        --btn-text: #7fb8e8;
+      }
+    }
+    text { fill: var(--text); }
+    .muted { fill: var(--text-muted); }
+    .meta { fill: var(--meta); font-size: 11px; }
+    .title { font-size: 26px; font-weight: 700; }
+    .subtitle { font-size: 14px; }
+    .bubble-text { font-size: 13px; }
+    .bubble-strong { font-size: 13px; font-weight: 700; }
+    .btn-text { font-size: 12.5px; font-weight: 600; fill: var(--btn-text); }
+    .caption { font-size: 13px; font-weight: 600; }
+  </style>
+
+  <rect x="0" y="0" width="1200" height="640" fill="var(--bg)"/>
+  <text x="40" y="42" class="title">UniqVid Bot — inside the chat</text>
+  <text x="40" y="64" class="subtitle muted">Send a video, get it back unique — with a plain-language breakdown of every change</text>
+
+  <!-- phone frame 1: before -->
+  <g transform="translate(60, 96)">
+    <rect x="0" y="0" width="340" height="500" rx="28" fill="var(--panel-bg)" stroke="var(--card-border)" stroke-width="1.5"/>
+    <rect x="0" y="0" width="340" height="56" rx="28" fill="var(--header-bg)"/>
+    <rect x="0" y="28" width="340" height="28" fill="var(--header-bg)"/>
+    <circle cx="34" cy="28" r="16" fill="#ffffff" opacity="0.25"/>
+    <text x="60" y="24" fill="var(--header-text)" font-size="14" font-weight="700">UniqVid Bot</text>
+    <text x="60" y="40" fill="var(--header-text)" font-size="11" opacity="0.85">online</text>
+
+    <!-- incoming bubble: welcome -->
+    <rect x="16" y="76" width="230" height="86" rx="12" fill="var(--bubble-in-bg)"/>
+    <text x="28" y="98" class="bubble-text" fill="var(--bubble-in-text)">Send me a video — I'll make</text>
+    <text x="28" y="114" class="bubble-text" fill="var(--bubble-in-text)">it unique and explain exactly</text>
+    <text x="28" y="130" class="bubble-text" fill="var(--bubble-in-text)">what changed and why.</text>
+    <text x="228" y="152" class="meta" text-anchor="end">09:14</text>
+
+    <!-- outgoing bubble: video sent -->
+    <rect x="94" y="176" width="230" height="64" rx="12" fill="var(--bubble-out-bg)"/>
+    <text x="108" y="200" class="bubble-text" fill="var(--bubble-out-text)">🎬 clip_final_v3.mp4</text>
+    <text x="108" y="216" class="bubble-text" fill="var(--bubble-out-text)" opagraphy="0.8">12.4 MB</text>
+    <text x="308" y="230" class="meta" text-anchor="end">09:15 ✓✓</text>
+
+    <!-- incoming: processing -->
+    <rect x="16" y="256" width="220" height="40" rx="12" fill="var(--bubble-in-bg)"/>
+    <text x="28" y="280" class="bubble-text" fill="var(--bubble-in-text)">⚙️ Processing your video...</text>
+
+    <!-- incoming: result with explanation -->
+    <rect x="16" y="310" width="270" height="168" rx="12" fill="var(--bubble-in-bg)"/>
+    <text x="28" y="332" class="bubble-strong" fill="var(--bubble-in-text)">✅ Done! What changed:</text>
+    <text x="28" y="352" class="bubble-text" fill="var(--bubble-in-text)">🔍 Zoomed &amp; cropped 3.8%</text>
+    <text x="28" y="370" class="bubble-text" fill="var(--bubble-in-text)">🎨 Color-graded (gamma/sat)</text>
+    <text x="28" y="388" class="bubble-text" fill="var(--bubble-in-text)">⏱ Speed 1.02x, pitch shifted</text>
+    <text x="28" y="406" class="bubble-text" fill="var(--bubble-in-text)">🌫 Film grain added</text>
+    <text x="28" y="424" class="bubble-text" fill="var(--bubble-in-text)">🧹 Metadata wiped — new hash</text>
+    <text x="28" y="452" class="bubble-text" fill="var(--bubble-in-text)" opacity="0.7">🎬 clip_final_v3_unique.mp4</text>
+    <text x="270" y="468" class="meta" text-anchor="end">09:16</text>
+  </g>
+
+  <!-- phone frame 2: admin panel -->
+  <g transform="translate(460, 96)">
+    <rect x="0" y="0" width="340" height="500" rx="28" fill="var(--panel-bg)" stroke="var(--card-border)" stroke-width="1.5"/>
+    <rect x="0" y="0" width="340" height="56" rx="28" fill="var(--header-bg)"/>
+    <rect x="0" y="28" width="340" height="28" fill="var(--header-bg)"/>
+    <circle cx="34" cy="28" r="16" fill="#ffffff" opacity="0.25"/>
+    <text x="60" y="24" fill="var(--header-text)" font-size="14" font-weight="700">UniqVid Bot</text>
+    <text x="60" y="40" fill="var(--header-text)" font-size="11" opacity="0.85">online</text>
+
+    <rect x="16" y="76" width="270" height="46" rx="12" fill="var(--bubble-in-bg)"/>
+    <text x="28" y="104" class="bubble-strong" fill="var(--bubble-in-text)">🛠 Admin panel</text>
+
+    <!-- admin menu buttons -->
+    <rect x="16" y="134" width="270" height="42" rx="10" fill="var(--btn-bg)" stroke="var(--btn-border)"/>
+    <text x="151" y="160" text-anchor="middle" class="btn-text">📊 Stats</text>
+    <rect x="16" y="184" width="270" height="42" rx="10" fill="var(--btn-bg)" stroke="var(--btn-border)"/>
+    <text x="151" y="210" text-anchor="middle" class="btn-text">📣 Broadcast</text>
+    <rect x="16" y="234" width="270" height="42" rx="10" fill="var(--btn-bg)" stroke="var(--btn-border)"/>
+    <text x="151" y="260" text-anchor="middle" class="btn-text">📢 Channels</text>
+
+    <!-- stats bubble -->
+    <rect x="16" y="292" width="270" height="120" rx="12" fill="var(--bubble-in-bg)"/>
+    <text x="28" y="314" class="bubble-strong" fill="var(--bubble-in-text)">📊 Stats</text>
+    <text x="28" y="334" class="bubble-text" fill="var(--bubble-in-text)">Total users: 1,204</text>
+    <text x="28" y="352" class="bubble-text" fill="var(--bubble-in-text)">New in 24h: 38</text>
+    <text x="28" y="370" class="bubble-text" fill="var(--bubble-in-text)">Videos processed: 3,981</text>
+    <text x="28" y="388" class="bubble-text" fill="var(--bubble-in-text)">Videos in 24h: 212</text>
+
+    <rect x="16" y="428" width="270" height="42" rx="10" fill="var(--btn-bg)" stroke="var(--btn-border)"/>
+    <text x="151" y="454" text-anchor="middle" class="btn-text">⬅ Back</text>
+  </g>
+
+  <text x="60" y="622" class="caption muted">Left: video → uniquify → explanation. Right: full admin panel, buttons only — no slash commands.</text>
+</svg>
