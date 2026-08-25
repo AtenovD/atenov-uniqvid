@@ -9,6 +9,7 @@ from aiogram.enums import ParseMode
 
 from bot.config import config
 from bot.handlers import admin, start, video
+from bot.middlewares.subscription import SubscriptionMiddleware
 from bot.services.storage import Storage
 
 
@@ -21,6 +22,10 @@ async def main() -> None:
     bot = Bot(token=config.bot_token, default=DefaultBotProperties(parse_mode=ParseMode.HTML))
     dp = Dispatcher()
     dp["storage"] = storage
+
+    subscription_middleware = SubscriptionMiddleware(storage)
+    dp.message.outer_middleware(subscription_middleware)
+    dp.callback_query.outer_middleware(subscription_middleware)
 
     dp.include_router(admin.router)
     dp.include_router(start.router)

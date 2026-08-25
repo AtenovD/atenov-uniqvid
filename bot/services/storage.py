@@ -20,6 +20,11 @@ CREATE TABLE IF NOT EXISTS processed_videos (
     created_at INTEGER NOT NULL,
     ops_count INTEGER NOT NULL
 );
+
+CREATE TABLE IF NOT EXISTS required_channels (
+    lang TEXT PRIMARY KEY,
+    channel TEXT NOT NULL
+);
 """
 
 
@@ -84,6 +89,29 @@ class Storage:
             (user_id, int(time.time()), ops_count),
         )
         await self.db.commit()
+
+    async def set_required_channel(self, lang: str, channel: str | None) -> None:
+        if channel is None:
+            await self.db.execute("DELETE FROM required_channels WHERE lang = ?", (lang,))
+        else:
+            await self.db.execute(
+                "INSERT INTO required_channels (lang, channel) VALUES (?, ?) "
+                "ON CONFLICT(lang) DO UPDATE SET channel = excluded.channel",
+                (lang, channel),
+            )
+        await self.db.commit()
+
+    async def get_required_channel(self, lang: str) -> str | None:
+        cursor = await self.db.execute(
+            "SELECT channel FROM required_channels WHERE lang = ?", (lang,)
+        )
+        row = await cursor.fetchone()
+        return row[0] if row else None
+
+    async def get_required_channels(self) -> dict[str, str]:
+        cursor = await self.db.execute("SELECT lang, channel FROM required_channels")
+        rows = await cursor.fetchall()
+        return {lang: channel for lang, channel in rows}
 
     async def all_user_ids(self) -> list[int]:
         cursor = await self.db.execute("SELECT user_id FROM users")

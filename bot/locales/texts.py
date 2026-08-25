@@ -25,6 +25,20 @@ TEXTS: dict[str, dict[str, str]] = {
         "broadcast_usage": "Использование: ответь этой командой на сообщение, которое нужно разослать всем пользователям.",
         "broadcast_started": "📣 Рассылка начата ({total} получателей)...",
         "broadcast_done": "📣 Рассылка завершена: доставлено {sent}, ошибок {failed}.",
+        "subscribe_required": (
+            "🔒 Чтобы пользоваться ботом, подпишись на канал {channel}, затем нажми «Я подписался»."
+        ),
+        "subscribe_button": "📢 Открыть канал",
+        "subscribe_check_button": "✅ Я подписался",
+        "subscribe_still_not": "❌ Пока не вижу подписку. Подпишись и попробуй снова.",
+        "subscribe_confirmed": "✅ Подписка подтверждена, теперь бот доступен!",
+        "setchannel_usage": "Использование: /setchannel <ru|en> <@канал>",
+        "setchannel_bad_lang": "Язык должен быть ru или en.",
+        "setchannel_done": "✅ Обязательный канал для {lang}: {channel}",
+        "unsetchannel_usage": "Использование: /unsetchannel <ru|en>",
+        "unsetchannel_done": "✅ Обязательная подписка для {lang} отключена.",
+        "channels_status": "📋 Обязательные каналы:\nru: {ru}\nen: {en}",
+        "channels_none": "не задан",
     },
     "en": {
         "choose_lang": "Hi! Choose your language:",
@@ -50,6 +64,20 @@ TEXTS: dict[str, dict[str, str]] = {
         "broadcast_usage": "Usage: reply to the message you want to broadcast with this command.",
         "broadcast_started": "📣 Broadcast started ({total} recipients)...",
         "broadcast_done": "📣 Broadcast finished: delivered {sent}, failed {failed}.",
+        "subscribe_required": (
+            "🔒 To use this bot, subscribe to {channel}, then tap \"I've subscribed\"."
+        ),
+        "subscribe_button": "📢 Open channel",
+        "subscribe_check_button": "✅ I've subscribed",
+        "subscribe_still_not": "❌ Still not seeing your subscription. Subscribe and try again.",
+        "subscribe_confirmed": "✅ Subscription confirmed, the bot is now available!",
+        "setchannel_usage": "Usage: /setchannel <ru|en> <@channel>",
+        "setchannel_bad_lang": "Language must be ru or en.",
+        "setchannel_done": "✅ Required channel for {lang}: {channel}",
+        "unsetchannel_usage": "Usage: /unsetchannel <ru|en>",
+        "unsetchannel_done": "✅ Mandatory subscription for {lang} disabled.",
+        "channels_status": "📋 Required channels:\nru: {ru}\nen: {en}",
+        "channels_none": "not set",
     },
 }
 

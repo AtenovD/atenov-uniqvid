@@ -14,7 +14,8 @@
 - A random subset of transforms on every run: zoom+crop, micro-rotate, color grading, film grain, drifting scanline, micro border, speed shift, audio pitch shift, fades, full metadata rebuild
 - Plain-language explanation of what was applied and why, in the user's language
 - Interface language picker: 🇷🇺 Russian / 🇬🇧 English
-- Admin commands right inside the bot: `/stats` (usage stats), `/broadcast` (message all users, as a reply)
+- Optional mandatory-subscription gate, configurable per language: if set, every message is checked against that language's required channel before the bot responds; if unset, the bot works with no restriction
+- Admin commands right inside the bot: `/stats` (usage stats), `/broadcast` (message all users, as a reply), `/setchannel <ru|en> <@channel>` / `/unsetchannel <ru|en>` / `/channels` (manage the mandatory-subscription gate)
 
 ## Stack
 
@@ -60,6 +61,19 @@ docker run -d --env-file .env --restart unless-stopped uniqvid-bot
 | `ADMIN_IDS` | comma-separated admin user IDs |
 | `MAX_VIDEO_MB` | max size of an input video |
 | `WORK_DIR` | scratch folder for temporary files |
+
+## Mandatory subscription gate
+
+Admins can require users to subscribe to a Telegram channel before using the bot — a separate channel per interface language, or none at all.
+
+```
+/setchannel ru @your_ru_channel     # require subscription for Russian-speaking users
+/setchannel en @your_en_channel     # require subscription for English-speaking users
+/unsetchannel ru                    # disable the requirement for a language
+/channels                           # show current configuration
+```
+
+The bot must be an **admin in the target channel** to be able to check membership. When a language has no channel configured, users in that language use the bot with no restriction. When it does, the check runs on every incoming message; a subscribed user sees nothing extra — an unsubscribed one gets a prompt with a link to the channel and an "I've subscribed" recheck button.
 
 ## License
 

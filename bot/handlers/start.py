@@ -30,3 +30,13 @@ async def on_lang_chosen(callback: CallbackQuery, storage: Storage) -> None:
     await callback.message.edit_text(t(lang, "lang_set"))
     await callback.message.answer(t(lang, "welcome"))
     await callback.answer()
+
+
+@router.callback_query(F.data == "check_sub")
+async def on_check_sub(callback: CallbackQuery, storage: Storage) -> None:
+    # Reached only once SubscriptionMiddleware has confirmed the user is now subscribed.
+    user = await storage.get_user(callback.from_user.id)
+    lang = user.lang if user else "ru"
+    await callback.answer(t(lang, "subscribe_confirmed"), show_alert=True)
+    if callback.message:
+        await callback.message.delete()
