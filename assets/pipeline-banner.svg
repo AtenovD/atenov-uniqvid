@@ -1,0 +1,162 @@
+<svg viewBox="0 0 1200 660" xmlns="http://www.w3.org/2000/svg" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Helvetica,Arial,sans-serif">
+  <style>
+    :root {
+      --bg: #ffffff;
+      --card-bg: #f8fafc;
+      --card-border: #e2e8f0;
+      --text: #0f172a;
+      --text-muted: #64748b;
+      --accent: #6366f1;
+      --accent-soft: #eef2ff;
+      --accent-border: #c7d2fe;
+      --bubble-bg: #eef2ff;
+      --bubble-border: #c7d2fe;
+      --arrow: #94a3b8;
+    }
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --bg: #0b1220;
+        --card-bg: #141b2d;
+        --card-border: #263049;
+        --text: #f1f5f9;
+        --text-muted: #94a3b8;
+        --accent: #818cf8;
+        --accent-soft: #1e2344;
+        --accent-border: #363c6b;
+        --bubble-bg: #1a2140;
+        --bubble-border: #363c6b;
+        --arrow: #4b5568;
+      }
+    }
+    text { fill: var(--text); }
+    .muted { fill: var(--text-muted); }
+    .title { font-size: 30px; font-weight: 700; }
+    .subtitle { font-size: 15px; }
+    .stage-label { font-size: 16px; font-weight: 700; }
+    .stage-sub { font-size: 12.5px; }
+    .chip-label { font-size: 12.5px; font-weight: 600; }
+    .chip-icon { font-size: 18px; }
+    .badge-text { font-size: 12.5px; font-weight: 600; }
+    .bubble-text { font-size: 12px; }
+    .bubble-line { font-size: 11.5px; }
+    .card { fill: var(--card-bg); stroke: var(--card-border); stroke-width: 1.5; }
+    .chip { fill: var(--accent-soft); stroke: var(--accent-border); stroke-width: 1.2; }
+    .arrow { stroke: var(--arrow); stroke-width: 2.5; fill: none; }
+    .arrowhead { fill: var(--arrow); }
+    .badge { fill: var(--accent-soft); stroke: var(--accent-border); stroke-width: 1.2; }
+  </style>
+
+  <rect x="0" y="0" width="1200" height="660" fill="var(--bg)"/>
+
+  <text x="40" y="46" class="title">UniqVid Bot — video uniquization pipeline</text>
+  <text x="40" y="72" class="subtitle muted">Every run: a random subset of transforms + random parameters + a plain-language explanation of what changed and why</text>
+
+  <!-- Stage 1: Input -->
+  <rect x="40" y="150" width="190" height="130" rx="16" class="card"/>
+  <text x="135" y="205" text-anchor="middle" font-size="30">📥</text>
+  <text x="135" y="240" text-anchor="middle" class="stage-label">Input video</text>
+  <text x="135" y="260" text-anchor="middle" class="stage-sub muted">file or video-note</text>
+
+  <!-- Arrow 1 -->
+  <path d="M 235 215 L 288 215" class="arrow"/>
+  <polygon points="288,215 278,209 278,221" class="arrowhead"/>
+
+  <!-- Stage 2: pipeline box -->
+  <rect x="298" y="100" width="610" height="330" rx="18" class="card"/>
+  <text x="603" y="135" text-anchor="middle" class="stage-label">Randomized ffmpeg pipeline</text>
+  <text x="603" y="155" text-anchor="middle" class="stage-sub muted">4–9 of 9 operations picked fresh, new seed every run</text>
+
+  <!-- 3x3 grid of op chips -->
+  <!-- row 1 -->
+  <g>
+    <rect x="322" y="180" width="176" height="62" rx="12" class="chip"/>
+    <text x="340" y="207" class="chip-icon">🔍</text>
+    <text x="368" y="204" class="chip-label">Zoom + Crop</text>
+    <text x="368" y="221" class="chip-label" font-weight="400" font-size="11" opacity="0.75">2–5% scale</text>
+  </g>
+  <g>
+    <rect x="514" y="180" width="176" height="62" rx="12" class="chip"/>
+    <text x="532" y="207" class="chip-icon">🔄</text>
+    <text x="560" y="204" class="chip-label">Micro-rotate</text>
+    <text x="560" y="221" class="chip-label" font-weight="400" font-size="11" opacity="0.75">0.4–1.2°</text>
+  </g>
+  <g>
+    <rect x="706" y="180" width="176" height="62" rx="12" class="chip"/>
+    <text x="724" y="207" class="chip-icon">🎨</text>
+    <text x="752" y="204" class="chip-label">Color grade</text>
+    <text x="752" y="221" class="chip-label" font-weight="400" font-size="11" opacity="0.75">gamma / saturation</text>
+  </g>
+
+  <!-- row 2 -->
+  <g>
+    <rect x="322" y="254" width="176" height="62" rx="12" class="chip"/>
+    <text x="340" y="281" class="chip-icon">🌫</text>
+    <text x="368" y="278" class="chip-label">Film grain</text>
+    <text x="368" y="295" class="chip-label" font-weight="400" font-size="11" opacity="0.75">subtle noise</text>
+  </g>
+  <g>
+    <rect x="514" y="254" width="176" height="62" rx="12" class="chip"/>
+    <text x="532" y="281" class="chip-icon">📺</text>
+    <text x="560" y="278" class="chip-label">Scanline drift</text>
+    <text x="560" y="295" class="chip-label" font-weight="400" font-size="11" opacity="0.75">drifting band</text>
+  </g>
+  <g>
+    <rect x="706" y="254" width="176" height="62" rx="12" class="chip"/>
+    <text x="724" y="281" class="chip-icon">🖼</text>
+    <text x="752" y="278" class="chip-label">Micro border</text>
+    <text x="752" y="295" class="chip-label" font-weight="400" font-size="11" opacity="0.75">2–6px</text>
+  </g>
+
+  <!-- row 3 -->
+  <g>
+    <rect x="322" y="328" width="176" height="62" rx="12" class="chip"/>
+    <text x="340" y="355" class="chip-icon">⏱</text>
+    <text x="368" y="352" class="chip-label">Speed shift</text>
+    <text x="368" y="369" class="chip-label" font-weight="400" font-size="11" opacity="0.75">0.97–1.04x</text>
+  </g>
+  <g>
+    <rect x="514" y="328" width="176" height="62" rx="12" class="chip"/>
+    <text x="532" y="355" class="chip-icon">🎧</text>
+    <text x="560" y="352" class="chip-label">Pitch shift</text>
+    <text x="560" y="369" class="chip-label" font-weight="400" font-size="11" opacity="0.75">± 0.4 semitones</text>
+  </g>
+  <g>
+    <rect x="706" y="328" width="176" height="62" rx="12" class="chip"/>
+    <text x="724" y="355" class="chip-icon">🧹</text>
+    <text x="752" y="352" class="chip-label">Metadata wipe</text>
+    <text x="752" y="369" class="chip-label" font-weight="400" font-size="11" opacity="0.75">fresh file hash</text>
+  </g>
+
+  <!-- Arrow 2 -->
+  <path d="M 918 265 L 968 265" class="arrow"/>
+  <polygon points="968,265 958,259 958,271" class="arrowhead"/>
+
+  <!-- Stage 3: Output -->
+  <rect x="978" y="150" width="182" height="130" rx="16" class="card"/>
+  <text x="1069" y="205" text-anchor="middle" font-size="30">📤</text>
+  <text x="1069" y="240" text-anchor="middle" class="stage-label">Unique video</text>
+  <text x="1069" y="260" text-anchor="middle" class="stage-sub muted">fresh fingerprint</text>
+
+  <!-- Explanation bubble -->
+  <path d="M 298 470 h 610 a 14 14 0 0 1 14 14 v 110 a 14 14 0 0 1 -14 14 h -560 l -30 26 v -26 h -20 a 14 14 0 0 1 -14 -14 v -110 a 14 14 0 0 1 14 -14 z"
+        fill="var(--bubble-bg)" stroke="var(--bubble-border)" stroke-width="1.4"/>
+  <text x="322" y="498" class="bubble-text" font-weight="700">✅ Done! Here's what changed:</text>
+  <text x="322" y="519" class="bubble-line muted">🔍 Zoomed &amp; cropped by 3.8% — breaks frame-border matching</text>
+  <text x="322" y="538" class="bubble-line muted">🎨 Color-graded (gamma / saturation / contrast) — changes the color fingerprint</text>
+  <text x="322" y="557" class="bubble-line muted">⏱ Speed 1.02x, audio pitch shifted — changes the audio fingerprint</text>
+  <text x="322" y="576" class="bubble-line muted">🧹 Metadata wiped and regenerated — a brand new file hash</text>
+
+  <!-- badges row -->
+  <g>
+    <rect x="40" y="470" width="150" height="42" rx="21" class="badge"/>
+    <text x="115" y="496" text-anchor="middle" class="badge-text">🇷🇺 RU / 🇬🇧 EN</text>
+  </g>
+  <g>
+    <rect x="40" y="524" width="150" height="42" rx="21" class="badge"/>
+    <text x="115" y="550" text-anchor="middle" class="badge-text">/stats · /broadcast</text>
+  </g>
+  <g>
+    <rect x="40" y="578" width="150" height="42" rx="21" class="badge"/>
+    <text x="115" y="604" text-anchor="middle" class="badge-text">Docker · systemd</text>
+  </g>
+</svg>

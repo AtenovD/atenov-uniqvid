@@ -1,60 +1,66 @@
-# UniqVid Bot
+<p align="center">
+  <img src="assets/pipeline-banner.svg" alt="UniqVid Bot pipeline overview" width="100%">
+</p>
 
-Telegram-бот, который принимает видео и делает его уникальным: меняет картинку, звук и метаданные так, чтобы соцсети не считали ролик повтором оригинала. После обработки бот присылает читаемое объяснение — что именно было изменено и зачем (на русском или английском, в зависимости от выбора пользователя).
+<h1 align="center">UniqVid Bot</h1>
 
-## Возможности
+<p align="center">
+  A Telegram bot that takes a video and makes it unique — it alters the picture, sound and metadata so platforms stop treating the clip as a repost of the original. After processing, it explains exactly what was changed and why, in the user's own language.
+</p>
 
-- Приём видео файлом или видео-кружком
-- Случайный набор трансформаций на каждый запуск: масштаб+обрезка, микроповорот, цветокоррекция, зерно, дрейфующая скан-линия, микрорамка, изменение скорости, сдвиг тона звука, фейды, полная пересборка метаданных
-- Пояснение на языке пользователя, что применено и почему
-- Выбор языка интерфейса: 🇷🇺 русский / 🇬🇧 английский
-- Админ-команды прямо в боте: `/stats` (статистика), `/broadcast` (рассылка всем пользователям, ответом на сообщение)
+## Features
 
-## Стек
+- Accepts a video as a file or a video-note
+- A random subset of transforms on every run: zoom+crop, micro-rotate, color grading, film grain, drifting scanline, micro border, speed shift, audio pitch shift, fades, full metadata rebuild
+- Plain-language explanation of what was applied and why, in the user's language
+- Interface language picker: 🇷🇺 Russian / 🇬🇧 English
+- Admin commands right inside the bot: `/stats` (usage stats), `/broadcast` (message all users, as a reply)
 
-Python 3.12, [aiogram 3](https://docs.aiogram.dev/), ffmpeg (через subprocess), aiosqlite.
+## Stack
 
-## Быстрый старт
+Python 3.12, [aiogram 3](https://docs.aiogram.dev/), ffmpeg (via subprocess), aiosqlite.
+
+## Quick start
 
 ```bash
 python3 -m venv venv
 source venv/bin/activate
 pip install -r requirements.txt
-cp .env.example .env  # впиши BOT_TOKEN и ADMIN_IDS
+cp .env.example .env  # fill in BOT_TOKEN and ADMIN_IDS
 python -m bot.main
 ```
 
-Требуется установленный `ffmpeg`/`ffprobe` в PATH.
+Requires `ffmpeg`/`ffprobe` available on `PATH`.
 
-## Деплой на VPS (systemd)
+## Deploy on a VPS (systemd)
 
 ```bash
 sudo mkdir -p /opt/uniqvid-bot
 sudo cp -r . /opt/uniqvid-bot
 cd /opt/uniqvid-bot
 python3 -m venv venv && venv/bin/pip install -r requirements.txt
-cp .env.example .env  # заполнить
+cp .env.example .env  # fill in
 sudo cp deploy/uniqvid-bot.service /etc/systemd/system/
 sudo systemctl daemon-reload
 sudo systemctl enable --now uniqvid-bot
 ```
 
-## Деплой через Docker
+## Deploy with Docker
 
 ```bash
 docker build -t uniqvid-bot .
 docker run -d --env-file .env --restart unless-stopped uniqvid-bot
 ```
 
-## Конфигурация (`.env`)
+## Configuration (`.env`)
 
-| Переменная | Описание |
+| Variable | Description |
 |---|---|
-| `BOT_TOKEN` | токен бота от @BotFather |
-| `ADMIN_IDS` | ID администраторов через запятую |
-| `MAX_VIDEO_MB` | лимит размера входного видео |
-| `WORK_DIR` | папка для временных файлов |
+| `BOT_TOKEN` | bot token from @BotFather |
+| `ADMIN_IDS` | comma-separated admin user IDs |
+| `MAX_VIDEO_MB` | max size of an input video |
+| `WORK_DIR` | scratch folder for temporary files |
 
-## Лицензия
+## License
 
-MIT — см. [LICENSE](LICENSE).
+MIT — see [LICENSE](LICENSE).
