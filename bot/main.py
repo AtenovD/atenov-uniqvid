@@ -6,6 +6,7 @@ import logging
 from aiogram import Bot, Dispatcher
 from aiogram.client.default import DefaultBotProperties
 from aiogram.enums import ParseMode
+from aiogram.fsm.storage.memory import MemoryStorage
 
 from bot.config import config
 from bot.handlers import admin, start, video
@@ -20,7 +21,7 @@ async def main() -> None:
     await storage.connect()
 
     bot = Bot(token=config.bot_token, default=DefaultBotProperties(parse_mode=ParseMode.HTML))
-    dp = Dispatcher()
+    dp = Dispatcher(storage=MemoryStorage())
     dp["storage"] = storage
 
     subscription_middleware = SubscriptionMiddleware(storage)

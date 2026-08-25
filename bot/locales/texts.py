@@ -22,7 +22,6 @@ TEXTS: dict[str, dict[str, str]] = {
             "Видео обработано всего: {videos_total}\n"
             "Видео за 24ч: {videos_24h}"
         ),
-        "broadcast_usage": "Использование: ответь этой командой на сообщение, которое нужно разослать всем пользователям.",
         "broadcast_started": "📣 Рассылка начата ({total} получателей)...",
         "broadcast_done": "📣 Рассылка завершена: доставлено {sent}, ошибок {failed}.",
         "subscribe_required": (
@@ -32,13 +31,17 @@ TEXTS: dict[str, dict[str, str]] = {
         "subscribe_check_button": "✅ Я подписался",
         "subscribe_still_not": "❌ Пока не вижу подписку. Подпишись и попробуй снова.",
         "subscribe_confirmed": "✅ Подписка подтверждена, теперь бот доступен!",
-        "setchannel_usage": "Использование: /setchannel <ru|en> <@канал>",
-        "setchannel_bad_lang": "Язык должен быть ru или en.",
-        "setchannel_done": "✅ Обязательный канал для {lang}: {channel}",
-        "unsetchannel_usage": "Использование: /unsetchannel <ru|en>",
-        "unsetchannel_done": "✅ Обязательная подписка для {lang} отключена.",
-        "channels_status": "📋 Обязательные каналы:\nru: {ru}\nen: {en}",
         "channels_none": "не задан",
+        "admin_panel_title": "🛠 Админ-панель",
+        "admin_stats_title": "📊 Статистика",
+        "admin_broadcast_prompt": "Пришли сообщение (текст, фото, видео — что угодно), которое нужно разослать всем пользователям.",
+        "admin_broadcast_cancelled": "Рассылка отменена.",
+        "admin_channels_title": "📢 Обязательные каналы подписки",
+        "admin_channel_detail": "{flag} Язык: {lang}\nТекущий канал: {channel}",
+        "admin_channel_set_prompt": "Пришли username канала (например, @my_channel). Бот должен быть админом в этом канале.",
+        "admin_channel_set_done": "✅ Канал для {lang} установлен: {channel}",
+        "admin_channel_unset_done": "✅ Обязательная подписка для {lang} отключена.",
+        "admin_action_cancelled": "Отменено.",
     },
     "en": {
         "choose_lang": "Hi! Choose your language:",
@@ -61,7 +64,6 @@ TEXTS: dict[str, dict[str, str]] = {
             "Videos processed total: {videos_total}\n"
             "Videos in 24h: {videos_24h}"
         ),
-        "broadcast_usage": "Usage: reply to the message you want to broadcast with this command.",
         "broadcast_started": "📣 Broadcast started ({total} recipients)...",
         "broadcast_done": "📣 Broadcast finished: delivered {sent}, failed {failed}.",
         "subscribe_required": (
@@ -71,13 +73,17 @@ TEXTS: dict[str, dict[str, str]] = {
         "subscribe_check_button": "✅ I've subscribed",
         "subscribe_still_not": "❌ Still not seeing your subscription. Subscribe and try again.",
         "subscribe_confirmed": "✅ Subscription confirmed, the bot is now available!",
-        "setchannel_usage": "Usage: /setchannel <ru|en> <@channel>",
-        "setchannel_bad_lang": "Language must be ru or en.",
-        "setchannel_done": "✅ Required channel for {lang}: {channel}",
-        "unsetchannel_usage": "Usage: /unsetchannel <ru|en>",
-        "unsetchannel_done": "✅ Mandatory subscription for {lang} disabled.",
-        "channels_status": "📋 Required channels:\nru: {ru}\nen: {en}",
         "channels_none": "not set",
+        "admin_panel_title": "🛠 Admin panel",
+        "admin_stats_title": "📊 Stats",
+        "admin_broadcast_prompt": "Send the message (text, photo, video — anything) you want to broadcast to all users.",
+        "admin_broadcast_cancelled": "Broadcast cancelled.",
+        "admin_channels_title": "📢 Mandatory subscription channels",
+        "admin_channel_detail": "{flag} Language: {lang}\nCurrent channel: {channel}",
+        "admin_channel_set_prompt": "Send the channel username (e.g. @my_channel). The bot must be an admin in that channel.",
+        "admin_channel_set_done": "✅ Channel for {lang} set to: {channel}",
+        "admin_channel_unset_done": "✅ Mandatory subscription for {lang} disabled.",
+        "admin_action_cancelled": "Cancelled.",
     },
 }
 

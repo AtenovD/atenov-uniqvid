@@ -4,7 +4,8 @@ from aiogram import F, Router
 from aiogram.filters import CommandStart
 from aiogram.types import CallbackQuery, Message
 
-from bot.keyboards import language_keyboard
+from bot.config import config
+from bot.keyboards import admin_entry_keyboard, language_keyboard
 from bot.locales.texts import t
 from bot.services.storage import Storage
 
@@ -20,7 +21,8 @@ async def cmd_start(message: Message, storage: Storage) -> None:
         return
 
     await storage.upsert_user(message.from_user.id, message.from_user.username)
-    await message.answer(t(user.lang, "welcome"))
+    keyboard = admin_entry_keyboard() if message.from_user.id in config.admin_ids else None
+    await message.answer(t(user.lang, "welcome"), reply_markup=keyboard)
 
 
 @router.callback_query(F.data.startswith("lang:"))
@@ -28,7 +30,8 @@ async def on_lang_chosen(callback: CallbackQuery, storage: Storage) -> None:
     lang = callback.data.split(":", 1)[1]
     await storage.upsert_user(callback.from_user.id, callback.from_user.username, lang=lang)
     await callback.message.edit_text(t(lang, "lang_set"))
-    await callback.message.answer(t(lang, "welcome"))
+    keyboard = admin_entry_keyboard() if callback.from_user.id in config.admin_ids else None
+    await callback.message.answer(t(lang, "welcome"), reply_markup=keyboard)
     await callback.answer()
 
 
