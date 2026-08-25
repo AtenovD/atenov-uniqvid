@@ -1,0 +1,15 @@
+[Unit]
+Description=UniqVid Telegram Bot
+After=network.target
+
+[Service]
+Type=simple
+User=uniqvid
+WorkingDirectory=/opt/uniqvid-bot
+EnvironmentFile=/opt/uniqvid-bot/.env
+ExecStart=/opt/uniqvid-bot/venv/bin/python -m bot.main
+Restart=on-failure
+RestartSec=5
+
+[Install]
+WantedBy=multi-user.target
