@@ -65,6 +65,9 @@ docker run -d --env-file .env --restart unless-stopped uniqvid-bot
 | `ADMIN_IDS` | comma-separated admin user IDs |
 | `MAX_VIDEO_MB` | max size of an input video, also caps link downloads |
 | `WORK_DIR` | scratch folder for temporary files |
+| `DOWNLOAD_MAX_HEIGHT` | resolution cap for link downloads (default `1080`) |
+| `POT_PROVIDER_URL` | optional, e.g. `http://pot-provider:4416` — see below |
+| `COOKIES_FILE` | optional path to a Netscape-format `cookies.txt` — alternative to a PO Token provider |
 
 ## Downloading from a link
 
@@ -75,6 +78,19 @@ Send a YouTube or Instagram Reels URL instead of a file, and the bot will:
 3. Run the same randomized pipeline on it if you tap that button
 
 Only download and reprocess content you actually have the right to use — the bot doesn't check licensing for you.
+
+### Getting higher-than-360p YouTube downloads
+
+By default, YouTube downloads are capped at roughly 360p. That's not a bug — as of 2025, YouTube requires a **PO Token** to serve its web client's higher-quality formats, and `yt-dlp` falls back to the low-quality android client when one isn't available. Two ways to unlock full quality (up to `DOWNLOAD_MAX_HEIGHT`):
+
+1. **PO Token provider (recommended)** — run the bundled sidecar, no personal account needed:
+   ```bash
+   docker compose up -d
+   ```
+   `docker-compose.yml` starts the bot alongside [`bgutil-ytdlp-pot-provider`](https://github.com/Brainicism/bgutil-ytdlp-pot-provider) and wires `POT_PROVIDER_URL` automatically. That project's server component is GPL-3.0 licensed; it only talks to the bot over HTTP as a separate service, so it doesn't affect this project's own MIT license.
+2. **Authenticated cookies** — export a `cookies.txt` from a logged-in YouTube session (e.g. with a browser extension) and set `COOKIES_FILE=/path/to/cookies.txt`. Simpler to set up, but ties downloads to that account and needs the file refreshed if it expires.
+
+Without either, the bot still works — it just downloads at ~360p.
 
 ## Admin panel
 

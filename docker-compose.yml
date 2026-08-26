@@ -1,0 +1,21 @@
+services:
+  bot:
+    build: .
+    env_file: .env
+    environment:
+      - POT_PROVIDER_URL=http://pot-provider:4416
+    volumes:
+      - ./work:/app/work
+    restart: unless-stopped
+    depends_on:
+      - pot-provider
+
+  # Generates PO Tokens so yt-dlp can use YouTube's web client and pull full quality
+  # (up to DOWNLOAD_MAX_HEIGHT) instead of the ~360p cap the android client hits without one.
+  # https://github.com/Brainicism/bgutil-ytdlp-pot-provider (server component is GPL-3.0 licensed;
+  # it only talks to the bot over HTTP, it isn't linked into this project's code).
+  pot-provider:
+    image: brainicism/bgutil-ytdlp-pot-provider:latest
+    restart: unless-stopped
+    expose:
+      - "4416"

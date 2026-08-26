@@ -22,6 +22,9 @@ class Config:
     ffmpeg_bin: str = field(default_factory=lambda: os.getenv("FFMPEG_BIN", "ffmpeg"))
     ffprobe_bin: str = field(default_factory=lambda: os.getenv("FFPROBE_BIN", "ffprobe"))
     broadcast_delay_sec: float = field(default_factory=lambda: float(os.getenv("BROADCAST_DELAY_SEC", "0.05")))
+    download_max_height: int = field(default_factory=lambda: int(os.getenv("DOWNLOAD_MAX_HEIGHT", "1080")))
+    pot_provider_url: str | None = field(default_factory=lambda: os.getenv("POT_PROVIDER_URL") or None)
+    cookies_file: str | None = field(default_factory=lambda: os.getenv("COOKIES_FILE") or None)
 
 
 config = Config()

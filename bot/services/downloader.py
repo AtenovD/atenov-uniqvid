@@ -19,10 +19,9 @@ def is_supported_link(text: str) -> bool:
     return bool(_SUPPORTED_RE.search(text))
 
 
-async def download_video(url: str, out_dir: Path) -> Path:
-    out_dir.mkdir(parents=True, exist_ok=True)
-    stem = f"dl_{uuid4().hex}"
-    out_template = str(out_dir / f"{stem}.%(ext)s")
+def _build_args(url: str, out_template: str) -> list[str]:
+    height = config.download_max_height
+    has_po_source = bool(config.pot_provider_url or config.cookies_file)
 
     args = [
         sys.executable,
@@ -30,12 +29,24 @@ async def download_video(url: str, out_dir: Path) -> Path:
         "yt_dlp",
         "--no-playlist",
         "--no-warnings",
-        # YouTube's default web client currently triggers SABR streaming restrictions in yt-dlp;
-        # the android client sidesteps that at the cost of capping quality without a PO token.
-        "--extractor-args",
-        "youtube:player_client=android,web",
+    ]
+
+    if has_po_source:
+        # With a PO Token source (provider or authenticated cookies), the web client is unlocked
+        # and can serve full quality; android stays as a fallback if web extraction fails.
+        args += ["--extractor-args", "youtube:player_client=web,android"]
+        if config.pot_provider_url:
+            args += ["--extractor-args", f"youtubepot-bgutilhttp:base_url={config.pot_provider_url}"]
+        if config.cookies_file:
+            args += ["--cookies", config.cookies_file]
+    else:
+        # No PO Token source configured: the web client triggers YouTube's SABR restrictions, and
+        # android/ios without a token are capped at ~360p. This is the safe, zero-setup default.
+        args += ["--extractor-args", "youtube:player_client=android,web"]
+
+    args += [
         "-f",
-        "bv*[ext=mp4]+ba[ext=m4a]/b[ext=mp4]/best",
+        f"bv*[ext=mp4][height<={height}]+ba[ext=m4a]/b[ext=mp4][height<={height}]/best[height<={height}]/best",
         "--merge-output-format",
         "mp4",
         "--max-filesize",
@@ -44,6 +55,15 @@ async def download_video(url: str, out_dir: Path) -> Path:
         out_template,
         url,
     ]
+    return args
+
+
+async def download_video(url: str, out_dir: Path) -> Path:
+    out_dir.mkdir(parents=True, exist_ok=True)
+    stem = f"dl_{uuid4().hex}"
+    out_template = str(out_dir / f"{stem}.%(ext)s")
+
+    args = _build_args(url, out_template)
 
     proc = await asyncio.create_subprocess_exec(
         *args, stdout=asyncio.subprocess.PIPE, stderr=asyncio.subprocess.PIPE

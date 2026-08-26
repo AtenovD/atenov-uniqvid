@@ -1,0 +1,4 @@
+# Optional: only needed if POT_PROVIDER_URL is set to unlock full-quality YouTube downloads.
+# This package is GPL-3.0 licensed (unlike the rest of this project, which is MIT) — it's an
+# optional yt-dlp plugin, not a dependency of this project's own code.
+bgutil-ytdlp-pot-provider>=1.0.0
