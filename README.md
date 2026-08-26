@@ -14,7 +14,7 @@
 
 ## Features
 
-- Accepts a video as a file or a video-note
+- Accepts a video as a file, a video-note, **or a YouTube/Instagram Reels link** — the bot downloads it as MP4 via `yt-dlp` and offers to uniquify it right away
 - A random subset of transforms on every run: zoom+crop, micro-rotate, color grading, film grain, drifting scanline, micro border, speed shift, audio pitch shift, fades, full metadata rebuild
 - Plain-language explanation of what was applied and why, in the user's language
 - Interface language picker: 🇷🇺 Russian / 🇬🇧 English
@@ -23,7 +23,7 @@
 
 ## Stack
 
-Python 3.12, [aiogram 3](https://docs.aiogram.dev/), ffmpeg (via subprocess), aiosqlite.
+Python 3.12, [aiogram 3](https://docs.aiogram.dev/), ffmpeg (via subprocess), [yt-dlp](https://github.com/yt-dlp/yt-dlp), aiosqlite.
 
 ## Quick start
 
@@ -63,8 +63,18 @@ docker run -d --env-file .env --restart unless-stopped uniqvid-bot
 |---|---|
 | `BOT_TOKEN` | bot token from @BotFather |
 | `ADMIN_IDS` | comma-separated admin user IDs |
-| `MAX_VIDEO_MB` | max size of an input video |
+| `MAX_VIDEO_MB` | max size of an input video, also caps link downloads |
 | `WORK_DIR` | scratch folder for temporary files |
+
+## Downloading from a link
+
+Send a YouTube or Instagram Reels URL instead of a file, and the bot will:
+
+1. Download it as MP4 with `yt-dlp` (capped at `MAX_VIDEO_MB`)
+2. Send the MP4 back with a "✨ Uniquify this video" button
+3. Run the same randomized pipeline on it if you tap that button
+
+Only download and reprocess content you actually have the right to use — the bot doesn't check licensing for you.
 
 ## Admin panel
 

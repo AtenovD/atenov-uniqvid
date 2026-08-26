@@ -2,6 +2,8 @@ from __future__ import annotations
 
 from aiogram.types import InlineKeyboardButton, InlineKeyboardMarkup
 
+from bot.locales.texts import t
+
 
 def language_keyboard() -> InlineKeyboardMarkup:
     return InlineKeyboardMarkup(
@@ -51,6 +53,12 @@ def admin_channels_keyboard() -> InlineKeyboardMarkup:
             ],
             [InlineKeyboardButton(text="⬅ Back", callback_data="admin:open")],
         ]
+    )
+
+
+def uniquify_now_keyboard(lang: str) -> InlineKeyboardMarkup:
+    return InlineKeyboardMarkup(
+        inline_keyboard=[[InlineKeyboardButton(text=t(lang, "uniquify_now_button"), callback_data="postdl:uniquify")]]
     )
 
 

@@ -7,13 +7,20 @@ TEXTS: dict[str, dict[str, str]] = {
         "welcome": (
             "Пришли мне видео — я сделаю его уникальным: изменю картинку, звук и метаданные так, "
             "чтобы платформы не считали его повтором оригинала. После обработки я расскажу, что именно "
-            "было изменено и зачем."
+            "было изменено и зачем.\n\n"
+            "Можно и не искать файл — просто пришли ссылку на YouTube или Instagram Reels, я скачаю "
+            "видео в MP4 и сразу предложу его уникализировать."
         ),
         "processing": "⚙️ Обрабатываю видео, это займёт немного времени...",
         "done_caption": "✅ Готово! Вот что было сделано:\n\n{explanation}",
         "error": "❌ Не получилось обработать видео. Попробуй ещё раз или пришли другой файл.",
         "too_large": "❌ Файл слишком большой (максимум {max_mb} МБ).",
-        "not_a_video": "Пришли, пожалуйста, видео файлом или кружком.",
+        "not_a_video": "Пришли, пожалуйста, видео файлом, кружком или ссылкой на YouTube/Instagram.",
+        "download_progress": "⬇️ Скачиваю видео по ссылке...",
+        "download_error": "❌ Не получилось скачать видео по этой ссылке. Проверь, что она рабочая и видео не приватное.",
+        "download_done_caption": "✅ Видео скачано в MP4. Уникализировать его прямо сейчас?",
+        "uniquify_now_button": "✨ Уникализировать это видео",
+        "download_expired": "❌ Это скачанное видео уже недоступно, пришли ссылку ещё раз.",
         "admin_only": "⛔ Команда доступна только администраторам.",
         "stats": (
             "📊 Статистика\n\n"
@@ -49,13 +56,20 @@ TEXTS: dict[str, dict[str, str]] = {
         "welcome": (
             "Send me a video — I'll uniquify it: alter the picture, sound and metadata so platforms "
             "won't flag it as a repost of the original. After processing I'll explain exactly what was "
-            "changed and why."
+            "changed and why.\n\n"
+            "No file handy? Just send a YouTube or Instagram Reels link — I'll download it as MP4 and "
+            "offer to uniquify it right away."
         ),
         "processing": "⚙️ Processing your video, this will take a moment...",
         "done_caption": "✅ Done! Here's what was changed:\n\n{explanation}",
         "error": "❌ Couldn't process this video. Try again or send another file.",
         "too_large": "❌ File is too large (max {max_mb} MB).",
-        "not_a_video": "Please send a video file or video note.",
+        "not_a_video": "Please send a video file, a video note, or a YouTube/Instagram link.",
+        "download_progress": "⬇️ Downloading the video from that link...",
+        "download_error": "❌ Couldn't download from that link. Make sure it's valid and the video isn't private.",
+        "download_done_caption": "✅ Video downloaded as MP4. Uniquify it now?",
+        "uniquify_now_button": "✨ Uniquify this video",
+        "download_expired": "❌ That downloaded video isn't available anymore, send the link again.",
         "admin_only": "⛔ This command is for admins only.",
         "stats": (
             "📊 Stats\n\n"

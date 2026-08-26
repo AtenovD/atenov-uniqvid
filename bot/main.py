@@ -9,7 +9,7 @@ from aiogram.enums import ParseMode
 from aiogram.fsm.storage.memory import MemoryStorage
 
 from bot.config import config
-from bot.handlers import admin, start, video
+from bot.handlers import admin, download, start, video
 from bot.middlewares.subscription import SubscriptionMiddleware
 from bot.services.storage import Storage
 
@@ -30,6 +30,7 @@ async def main() -> None:
 
     dp.include_router(admin.router)
     dp.include_router(start.router)
+    dp.include_router(download.router)
     dp.include_router(video.router)
 
     try:
