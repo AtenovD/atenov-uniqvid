@@ -67,7 +67,9 @@ docker run -d --env-file .env --restart unless-stopped uniqvid-bot
 | `WORK_DIR` | scratch folder for temporary files |
 | `DOWNLOAD_MAX_HEIGHT` | resolution cap for link downloads (default `1080`) |
 | `POT_PROVIDER_URL` | optional, e.g. `http://pot-provider:4416` — see below |
-| `COOKIES_FILE` | optional path to a Netscape-format `cookies.txt` — alternative to a PO Token provider |
+| `COOKIES_FILE` | optional path to a static Netscape-format `cookies.txt` |
+| `COOKIE_URLS` | optional, comma-separated URLs to fetch backup `cookies.txt` files from — tried in order, see below |
+| `COOKIE_REVALIDATE_MINUTES` | how often a fetched cookie file is re-validated (default `360`) |
 
 ## Downloading from a link
 
@@ -88,9 +90,11 @@ By default, YouTube downloads are capped at roughly 360p. That's not a bug — a
    docker compose up -d
    ```
    `docker-compose.yml` starts the bot alongside [`bgutil-ytdlp-pot-provider`](https://github.com/Brainicism/bgutil-ytdlp-pot-provider) and wires `POT_PROVIDER_URL` automatically. That project's server component is GPL-3.0 licensed; it only talks to the bot over HTTP as a separate service, so it doesn't affect this project's own MIT license.
-2. **Authenticated cookies** — export a `cookies.txt` from a logged-in YouTube session (e.g. with a browser extension) and set `COOKIES_FILE=/path/to/cookies.txt`. Simpler to set up, but ties downloads to that account and needs the file refreshed if it expires.
+2. **Authenticated cookies** — export a `cookies.txt` from a logged-in YouTube session (e.g. with a browser extension). Two ways to supply it:
+   - `COOKIES_FILE=/path/to/cookies.txt` — a single static file.
+   - `COOKIE_URLS=https://host/cookie1.txt,https://host/cookie2.txt,...` — the bot fetches each URL in order, checks it's a valid Netscape-format cookie file under 100KB, and test-runs `yt-dlp` against a short public video before trusting it. The first source that passes becomes active; it's re-validated every `COOKIE_REVALIDATE_MINUTES`. This is the pattern used by other production yt-dlp bots ([tg-ytdlp-bot](https://github.com/upekshaip/tg-ytdlp-bot)) — hosting a few backup cookie files means one flagged/expired account doesn't take the whole download feature down.
 
-Without either, the bot still works — it just downloads at ~360p.
+Without any of these, the bot still works — it just downloads at ~360p.
 
 ## Admin panel
 

@@ -19,9 +19,9 @@ def is_supported_link(text: str) -> bool:
     return bool(_SUPPORTED_RE.search(text))
 
 
-def _build_args(url: str, out_template: str) -> list[str]:
+def _build_args(url: str, out_template: str, cookies_path: Path | None) -> list[str]:
     height = config.download_max_height
-    has_po_source = bool(config.pot_provider_url or config.cookies_file)
+    has_po_source = bool(config.pot_provider_url or cookies_path)
 
     args = [
         sys.executable,
@@ -37,8 +37,8 @@ def _build_args(url: str, out_template: str) -> list[str]:
         args += ["--extractor-args", "youtube:player_client=web,android"]
         if config.pot_provider_url:
             args += ["--extractor-args", f"youtubepot-bgutilhttp:base_url={config.pot_provider_url}"]
-        if config.cookies_file:
-            args += ["--cookies", config.cookies_file]
+        if cookies_path:
+            args += ["--cookies", str(cookies_path)]
     else:
         # No PO Token source configured: the web client triggers YouTube's SABR restrictions, and
         # android/ios without a token are capped at ~360p. This is the safe, zero-setup default.
@@ -58,12 +58,12 @@ def _build_args(url: str, out_template: str) -> list[str]:
     return args
 
 
-async def download_video(url: str, out_dir: Path) -> Path:
+async def download_video(url: str, out_dir: Path, cookies_path: Path | None = None) -> Path:
     out_dir.mkdir(parents=True, exist_ok=True)
     stem = f"dl_{uuid4().hex}"
     out_template = str(out_dir / f"{stem}.%(ext)s")
 
-    args = _build_args(url, out_template)
+    args = _build_args(url, out_template, cookies_path)
 
     proc = await asyncio.create_subprocess_exec(
         *args, stdout=asyncio.subprocess.PIPE, stderr=asyncio.subprocess.PIPE

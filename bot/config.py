@@ -25,6 +25,12 @@ class Config:
     download_max_height: int = field(default_factory=lambda: int(os.getenv("DOWNLOAD_MAX_HEIGHT", "1080")))
     pot_provider_url: str | None = field(default_factory=lambda: os.getenv("POT_PROVIDER_URL") or None)
     cookies_file: str | None = field(default_factory=lambda: os.getenv("COOKIES_FILE") or None)
+    cookie_urls: list[str] = field(
+        default_factory=lambda: [u.strip() for u in os.getenv("COOKIE_URLS", "").split(",") if u.strip()]
+    )
+    cookie_revalidate_minutes: int = field(
+        default_factory=lambda: int(os.getenv("COOKIE_REVALIDATE_MINUTES", "360"))
+    )
 
 
 config = Config()
